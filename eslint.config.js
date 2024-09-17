@@ -1,6 +1,4 @@
-import js from '@eslint/js';
-import fs from 'fs';
-import path from 'path';
+import eslint from '@eslint/js';
 import globals from 'globals';
 import reactHooks from 'eslint-plugin-react-hooks';
 import react from 'eslint-plugin-react';
@@ -11,8 +9,6 @@ import tseslint from 'typescript-eslint';
 import prettierConfig from 'eslint-plugin-prettier/recommended';
 import is from 'eslint-plugin-no-inline-styles';
 
-const folders = ['metronic'];
-
 export default tseslint.config(
   // Ignore prod build files
   { ignores: ['dist'] },
@@ -20,7 +16,7 @@ export default tseslint.config(
   {
     files: ['src/*.{ts,tsx}'],
     extends: [
-      js.configs.recommended,
+      eslint.configs.recommended,
       ...tseslint.configs.strictTypeChecked,
       ...tseslint.configs.stylisticTypeChecked,
       prettierConfig,
@@ -87,15 +83,6 @@ export default tseslint.config(
           shorthandFirst: true,
         },
       ],
-    },
-    settings: {
-      'import/external-module-folders': ['node_modules'],
-      'import/internal-regex': `^(${folders.join('|')})[/]*`,
-      'import/resolver': {
-        node: {
-          paths: ['./src'],
-        },
-      },
     },
   }
 );

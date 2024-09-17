@@ -21,6 +21,13 @@ project using `npm`, use `nvm use` to be sure you are using same node version.
 
 ## Tech. decisions
 
+## Code quality
+
+- eslint
+- prettier
+- tsc
+- pre-commit check using lint-staged only for staged files, runs TS / JS linter check + prettier format
+
 ### Localization
 
 - preferred format [Intl](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl)
