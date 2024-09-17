@@ -1,8 +1,8 @@
-import path from "path";
+import path from 'path';
 
-import { defineConfig, loadEnv, ProxyOptions } from "vite";
-import react from "@vitejs/plugin-react";
-import tsconfigPaths from "vite-tsconfig-paths";
+import { defineConfig, loadEnv, ProxyOptions } from 'vite';
+import react from '@vitejs/plugin-react';
+import tsconfigPaths from 'vite-tsconfig-paths';
 
 const proxy: Record<string, string | ProxyOptions> = {};
 
@@ -20,24 +20,27 @@ export default function getConfig({ mode }: { mode: string }) {
         req.headers.origin = url.origin;
       },
       changeOrigin: true,
-      rewrite: (path) => path.replace(new RegExp(`^${apiPath}`), ""),
+      rewrite: (path) => path.replace(new RegExp(`^${apiPath}`), ''),
       target,
     };
   }
 
   return defineConfig({
     build: {
-      outDir: path.resolve(__dirname, "dist"),
+      outDir: path.resolve(__dirname, 'dist'),
       sourcemap: true,
     },
     css: {
       modules: {
-        localsConvention: "camelCase",
+        localsConvention: 'camelCase',
       },
     },
     define: {
       APP_VERSION: JSON.stringify(process.env.npm_package_version),
     },
     plugins: [react(), tsconfigPaths()],
+    server: {
+      port: Number(process.env.VITE_APP_PORT) || 5173,
+    },
   });
 }
