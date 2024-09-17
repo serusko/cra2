@@ -7,7 +7,7 @@ project using `npm`, use `nvm use` to be sure you are using same node version.
 - `npm run dev` -> Start local dev
 - `npm run build` -> produce production build (creates dist/ folder)
 - `npm run lint` -> Lint JS and TS files/rules
-- `npm run spell` -> run spellcheck - avoid grammar Prečo
+- `npm run spell` -> run spellcheck - avoid typos
 
 ## ENV / Config
 
