@@ -1,5 +1,5 @@
 {
   "language": "en,sk",
-  "words": ["energo", "metronic", "tseslint", "valllue"],
+  "words": ["metronic", "tseslint"],
   "ignorePaths": ["node_modules/**", ".DS_Store", "**/*.svg", "coverage/**", "**/__snapshots__/**", "jest.config.js"]
 }
