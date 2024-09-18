@@ -11,7 +11,7 @@ const proxy: Record<string, string | ProxyOptions> = {};
 export default function getConfig({ mode }: { mode: string }) {
   process.env = { ...process.env, ...loadEnv(mode, process.cwd()) };
 
-  const apiPath = process.env.VITE_API_PATH;
+  const apiPath = process.env.VITE_APP_API_PATH;
   const target = process.env.VITE_API_PROXY;
 
   if (apiPath && target) {
@@ -43,6 +43,9 @@ export default function getConfig({ mode }: { mode: string }) {
     plugins: [react(), tsconfigPaths()],
     server: {
       port: Number(process.env.VITE_APP_PORT) || 5173,
+      host: 'localhost',
+      cors: false,
+      proxy,
     },
   });
 }
