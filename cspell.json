@@ -1,5 +1,17 @@
 {
   "language": "en,sk",
-  "words": ["metronic", "tseslint"],
-  "ignorePaths": ["node_modules/**", ".DS_Store", "**/*.svg", "coverage/**", "**/__snapshots__/**", "jest.config.js"]
+  "words": [
+    "clsx",
+    "metronic",
+    "tailwindcss",
+    "tseslint"
+  ],
+  "ignorePaths": [
+    "node_modules/**",
+    ".DS_Store",
+    "**/*.svg",
+    "coverage/**",
+    "**/__snapshots__/**",
+    "jest.config.js"
+  ]
 }

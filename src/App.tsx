@@ -1,5 +1,8 @@
 import { FC, useEffect } from 'react';
 
+import './index.css';
+import Button from './core/components/Button';
+
 const App: FC = () => {
   useEffect(() => {
     fetch('/api')
@@ -11,7 +14,7 @@ const App: FC = () => {
         console.error(e);
       });
   }, []);
-  return <h1>xxx</h1>;
+  return <Button label="Button" />;
 };
 
 export default App;

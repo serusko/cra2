@@ -3,6 +3,8 @@ import path from 'path';
 import { defineConfig, loadEnv, ProxyOptions } from 'vite';
 import react from '@vitejs/plugin-react';
 import tsconfigPaths from 'vite-tsconfig-paths';
+import tailwind from 'tailwindcss';
+import autoprefixer from 'autoprefixer';
 
 const proxy: Record<string, string | ProxyOptions> = {};
 
@@ -31,8 +33,8 @@ export default function getConfig({ mode }: { mode: string }) {
       sourcemap: true,
     },
     css: {
-      modules: {
-        localsConvention: 'camelCase',
+      postcss: {
+        plugins: [tailwind, autoprefixer],
       },
     },
     define: {

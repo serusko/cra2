@@ -8,13 +8,14 @@ import reactRefresh from 'eslint-plugin-react-refresh';
 import tseslint from 'typescript-eslint';
 import prettierConfig from 'eslint-plugin-prettier/recommended';
 import is from 'eslint-plugin-no-inline-styles';
+import pluginTailwindCSS from 'eslint-plugin-tailwindcss';
 
 export default tseslint.config(
   // Ignore prod build files
   { ignores: ['dist'] },
   // TS + React
   {
-    files: ['src/*.{ts,tsx}'],
+    files: ['src/**/*.{ts,tsx}', 'vite.config.ts'],
     extends: [
       eslint.configs.recommended,
       ...tseslint.configs.strictTypeChecked,
@@ -49,32 +50,31 @@ export default tseslint.config(
       ...reactHooks.configs.recommended.rules,
       ...react.configs.recommended.rules,
       ...react.configs['jsx-runtime'].rules,
+      '@typescript-eslint/ban-ts-comment': ['warn', { 'ts-ignore': 'allow-with-description' }],
+      '@typescript-eslint/no-unused-vars': ['warn', { argsIgnorePattern: '^_' }],
+      '@typescript-eslint/no-use-before-define': 'off',
       'prettier/prettier': 'warn',
-      'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
+      'react/boolean-prop-naming': ['warn', { rule: '^(is|has)[A-Z]([A-Za-z0-9]?)+' }],
+      'react/jsx-handler-names': 'warn',
       'react/jsx-uses-react': 'off',
       'react/react-in-jsx-scope': 'off',
+      'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
     },
   },
   // Custom
   {
     extends: [],
-    plugins: { 'jsx-a11y': jsxA11y, 'no-inline-styles': is },
+    plugins: { 'jsx-a11y': jsxA11y, 'no-inline-styles': is, react: react },
     rules: {
-      '@typescript-eslint/ban-ts-comment': ['warn', { 'ts-ignore': 'allow-with-description' }],
-      '@typescript-eslint/no-unused-vars': ['warn', { argsIgnorePattern: '^_' }],
-      '@typescript-eslint/no-use-before-define': 'off',
-      'no-unused-vars': 'off',
       'jsx-a11y/click-events-have-key-events': 'warn',
       'jsx-a11y/no-noninteractive-element-interactions': 'warn',
-      'no-unused-vars': 'off',
-      'prefer-const': 'warn',
-      'prefer-template': 'warn',
-      'react/boolean-prop-naming': ['warn', { rule: '^(is|has)[A-Z]([A-Za-z0-9]?)+' }],
-      'sort-keys': ['warn', 'asc', { caseSensitive: true, natural: true }],
-      'react/jsx-handler-names': 'warn',
       'no-console': 'warn',
       'no-debugger': 'warn',
       'no-inline-styles/no-inline-styles': 'error',
+      'no-unused-vars': 'off',
+      'no-unused-vars': 'off',
+      'prefer-const': 'warn',
+      'prefer-template': 'warn',
       'react/jsx-sort-props': [
         'warn',
         {
@@ -83,6 +83,12 @@ export default tseslint.config(
           shorthandFirst: true,
         },
       ],
+      // 'sort-keys': ['warn', 'asc', { caseSensitive: true, natural: true }],
     },
+  },
+  // Tailwind
+  {
+    plugins: { tailwindcss: pluginTailwindCSS },
+    rules: { ...pluginTailwindCSS.configs.recommended.rules, 'tailwindcss/classnames-order': 'warn' },
   }
 );
