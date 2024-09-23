@@ -2,8 +2,10 @@
   "language": "en,sk",
   "words": [
     "clsx",
+    "iban",
     "metronic",
     "tailwindcss",
+    "tanstack",
     "tseslint"
   ],
   "ignorePaths": [

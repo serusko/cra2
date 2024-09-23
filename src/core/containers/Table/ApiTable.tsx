@@ -1,25 +1,25 @@
-import { useEffect, useState } from 'react';
 import Table from './index';
-import { ColDef } from './components/TableItem';
+import type { Props as TableProps } from './index';
+import useList from '../../api/useList';
 
-interface Props<D> {
+interface Props<D> extends Omit<TableProps<D>, 'data'> {
   url: string;
-  columns: ColDef<D>[];
 }
 
-function ApiTable<D>({ url, columns }: Props<D>) {
-  const [data, setData] = useState<D[]>([]);
+function ApiTable<D>({ url, ...props }: Props<D>) {
+  const { data, isLoading, isError } = useList<D>(url);
 
-  useEffect(() => {
-    fetch(url)
-      .then((r) => r.json())
-      .then(setData)
-      .catch((e: unknown) => {
-        // eslint-disable-next-line no-console
-        console.error(e);
-      });
-  }, [url]);
-  return <Table<D> columns={columns} data={data} limit={0} />;
+  const items = data?.data ?? ([] as D[]);
+
+  if (isLoading) {
+    return <h2>Loading...</h2>;
+  }
+
+  if (isError) {
+    return <h2>Error...</h2>;
+  }
+
+  return <Table<D> data={items} {...props} />;
 }
 
 export default ApiTable;

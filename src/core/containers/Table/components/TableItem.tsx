@@ -3,13 +3,14 @@ export interface ColDef<D> {
 }
 
 interface Props<D> {
+  onClick?: () => void;
   columns: ColDef<D>[];
   data: D;
 }
 
-function TableItem<D>({ columns, data }: Props<D>) {
+function TableItem<D>({ onClick, columns, data }: Props<D>) {
   return (
-    <tr className="even:bg-gray-200">
+    <tr className="even:bg-gray-200" style={onClick && { cursor: 'pointer' }} onClick={onClick}>
       {columns.map((c) => (
         <td className="px-4 py-2" key={c.name}>
           {/* @ts-ignore TODO: improve typings */}

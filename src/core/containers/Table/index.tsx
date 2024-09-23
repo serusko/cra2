@@ -4,13 +4,14 @@ import Header from './components/TableHeader';
 import TableItem, { ColDef } from './components/TableItem';
 import getPagesNumber from './helpers/getPagesNumber';
 
-interface Props<D> {
-  data: D[];
+export interface Props<D> {
+  onRowClick?: (item: D, index: number) => void;
   columns: ColDef<D>[];
-  limit: number;
+  limit?: number;
+  data: D[];
 }
 
-function Table<D>({ columns, data }: Props<D>) {
+function Table<D>({ columns, data, onRowClick }: Props<D>) {
   const [page, setPage] = useState(0);
   const [limit, setLimit] = useState(10); // TODO: implement api pagination
 
@@ -22,7 +23,14 @@ function Table<D>({ columns, data }: Props<D>) {
 
       <tbody>
         {displayed.map((item, index) => (
-          <TableItem<D> columns={columns} data={item} key={index} />
+          <TableItem<D>
+            columns={columns}
+            data={item}
+            key={index}
+            onClick={() => {
+              onRowClick?.(item, index);
+            }}
+          />
         ))}
       </tbody>
 

@@ -9,7 +9,8 @@ import autoprefixer from 'autoprefixer';
 const proxy: Record<string, string | ProxyOptions> = {};
 
 export default function getConfig({ mode }: { mode: string }) {
-  process.env = { ...process.env, ...loadEnv(mode, process.cwd()) };
+  const loadedEnv = loadEnv(mode, process.cwd());
+  process.env = { ...process.env, ...loadedEnv };
 
   const apiPath = process.env.VITE_APP_API_PATH;
   const target = process.env.VITE_API_PROXY;
@@ -24,6 +25,17 @@ export default function getConfig({ mode }: { mode: string }) {
       changeOrigin: true,
       rewrite: (path) => path.replace(new RegExp(`^${apiPath}`), ''),
       target,
+      configure: (_proxy) => {
+        // proxy.on('error', (err, _req, _res) => {
+        //   console.log('proxy error', err);
+        // });
+        // proxy.on('proxyReq', (proxyReq, req, _res) => {
+        //   console.log('Sending Request to the Target:', req.method, req.url);
+        // });
+        // proxy.on('proxyRes', (proxyRes, req, _res) => {
+        //   console.log('Received Response from the Target:', proxyRes.statusCode, req.url);
+        // });
+      },
     };
   }
 
@@ -38,7 +50,7 @@ export default function getConfig({ mode }: { mode: string }) {
       },
     },
     define: {
-      APP_VERSION: JSON.stringify(process.env.npm_package_version),
+      CONFIG: { ...loadedEnv, APP_VERSION: JSON.stringify(process.env.npm_package_version) },
     },
     plugins: [react(), tsconfigPaths()],
     server: {

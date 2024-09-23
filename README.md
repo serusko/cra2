@@ -11,11 +11,12 @@ project using `npm`, use `nvm use` to be sure you are using same node version.
 
 ## ENV / Config
 
-| Variable          | Example Value | Description                                           |
-| ----------------- | ------------- | ----------------------------------------------------- |
-| VITE_APP_PORT     | 3000          | Dev server port `localhost:PORT`                      |
-| VITE_APP_API_PATH | /api          | Api url (can be same as api server url in production) |
-| VITE_API_PROXY    | dev.org.io    | Choose dev server url                                 |
+| Variable                  | Example Value | Description                                           |
+| ------------------------- | ------------- | ----------------------------------------------------- |
+| VITE_APP_PORT             | 3000          | Dev server port `localhost:PORT`                      |
+| VITE_APP_API_PATH         | /api          | Api url (can be same as api server url in production) |
+| VITE_API_PROXY            | dev.org.io    | Choose dev server url                                 |
+| VITE_APP_ENABLE_QUERY_DEV | true/false    | Display TanStack query panel                          |
 
 - Same domain [here](/docs/sameDomain.md)
 

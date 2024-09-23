@@ -9,6 +9,7 @@ import tseslint from 'typescript-eslint';
 import prettierConfig from 'eslint-plugin-prettier/recommended';
 import is from 'eslint-plugin-no-inline-styles';
 import pluginTailwindCSS from 'eslint-plugin-tailwindcss';
+import pluginQuery from '@tanstack/eslint-plugin-query';
 
 export default tseslint.config(
   // Ignore prod build files
@@ -75,6 +76,7 @@ export default tseslint.config(
       'no-unused-vars': 'off',
       'prefer-const': 'warn',
       'prefer-template': 'warn',
+      '@typescript-eslint/restrict-template-expressions': ['warn', { allowNumber: true }],
       'react/jsx-sort-props': [
         'warn',
         {
@@ -90,5 +92,14 @@ export default tseslint.config(
   {
     plugins: { tailwindcss: pluginTailwindCSS },
     rules: { ...pluginTailwindCSS.configs.recommended.rules, 'tailwindcss/classnames-order': 'warn' },
+  },
+  // Query
+  {
+    plugins: {
+      '@tanstack/query': pluginQuery,
+    },
+    rules: {
+      '@tanstack/query/exhaustive-deps': 'error',
+    },
   }
 );

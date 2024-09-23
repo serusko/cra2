@@ -1,1 +1,11 @@
-{ "extends": "./tsconfig.json", "compilerOptions": { "composite": false, "jsx": "react-jsx", "esModuleInterop": true } }
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "moduleResolution": "bundler",
+    "esModuleInterop": true,
+    "module": "esnext",
+    "composite": false,
+    "jsx": "react-jsx",
+    "allowImportingTsExtensions": true
+  }
+}

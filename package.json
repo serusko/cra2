@@ -15,15 +15,22 @@
     "prepare": "husky install"
   },
   "dependencies": {
+    "@loadable/component": "^5.16.4",
+    "@tanstack/react-query": "^5.56.2",
+    "@tanstack/react-query-devtools": "^5.56.2",
+    "axios": "^1.7.7",
     "clsx": "^2.1.1",
     "react": "^18.3.1",
-    "react-dom": "^18.3.1"
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^6.26.2"
   },
   "devDependencies": {
     "@eslint/js": "^9.10.0",
     "@html-eslint/eslint-plugin": "^0.27.0",
     "@html-eslint/parser": "^0.27.0",
+    "@tanstack/eslint-plugin-query": "^5.57.1",
     "@types/eslint__js": "^8.42.3",
+    "@types/loadable__component": "^5.13.9",
     "@types/node": "^22.5.5",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",

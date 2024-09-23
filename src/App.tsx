@@ -1,20 +1,32 @@
 import { FC } from 'react';
+import loadable from '@loadable/component';
 
 import './index.css';
-import ApiTable from './core/containers/Table/ApiTable';
-import { ColDef } from './core/containers/Table/components/TableItem';
+import AuthProvider from './core/auth/AuthProvider';
+import ApiProvider from './core/api/ApiProvider';
+import { Route, Routes } from 'react-router-dom';
+import AppLayout from './app/containers/AppLayout';
 
-interface Post {
-  userId: number;
-  id: number;
-  title: string;
-  body: string;
-}
-
-const columns: ColDef<Post>[] = [{ name: 'id' }, { name: 'userId' }, { name: 'title' }];
+const SuppliersList = loadable(() => import('./suppliers/SuppliersList'));
+const SupplierDetail = loadable(() => import('./suppliers/SupplierDetail'));
 
 const App: FC = () => {
-  return <ApiTable<Post> columns={columns} url="/api/posts" />;
+  return (
+    <AuthProvider>
+      <ApiProvider>
+        <Routes>
+          <Route path="/auth"></Route>
+
+          <Route element={<AppLayout />} path="/">
+            <Route element={<SuppliersList />} path="/suppliers" />
+            <Route element={<SupplierDetail />} path="/suppliers/:id" />
+
+            <Route element={<></>} path="/clients" />
+          </Route>
+        </Routes>
+      </ApiProvider>
+    </AuthProvider>
+  );
 };
 
 export default App;
