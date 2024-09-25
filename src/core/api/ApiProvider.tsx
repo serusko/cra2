@@ -1,7 +1,7 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { PropsWithChildren, useMemo } from 'react';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
-import useAuthToken from '../auth/useAuthToken';
+import useAuthToken from '../auth/hooks/useAuthToken';
 
 const showDevPanel = import.meta.env.VITE_APP_ENABLE_QUERY_DEV;
 

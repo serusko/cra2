@@ -1,7 +1,7 @@
 import { createContext } from 'react';
 
 import User from './User';
-import { LoginResponse } from './useLogin';
+import { LoginResponse } from './hooks/useLogin';
 
 export interface AuthContextState {
   user: User;

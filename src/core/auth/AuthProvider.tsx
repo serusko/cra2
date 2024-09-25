@@ -1,7 +1,6 @@
 import { PropsWithChildren, useEffect, useRef, useState } from 'react';
 import AuthContext, { AuthContextState } from './context';
-import useLogin from './useLogin';
-import useGetProfile from './useGetProfile';
+import useGetProfile from './hooks/useGetProfile';
 
 const ACCESS_TOKEN_KEY = 'thisIsDefinitelyNotAccessToken';
 
@@ -11,7 +10,6 @@ function AuthProvider({ children }: PropsWithChildren) {
   const [state, setState] = useState<AuthContextState | undefined>(undefined);
   const initialized = useRef(!initialAT);
   const getProfile = useGetProfile();
-  const login = useLogin();
 
   useEffect(() => {
     if (!state && initialAT) {
@@ -48,25 +46,7 @@ function AuthProvider({ children }: PropsWithChildren) {
   }, [state]);
 
   return (
-    <AuthContext.Provider value={state}>
-      {state ? (
-        children
-      ) : (
-        <button
-          onClick={() => {
-            login('test@example.com', 'password')
-              .then((s) => {
-                setState(s);
-              })
-              .catch((_e: unknown) => {
-                // console.error('Login failed', e);
-              });
-          }}
-        >
-          Login
-        </button>
-      )}
-    </AuthContext.Provider>
+    <AuthContext.Provider value={state}>{!initialized.current ? 'auth loading...' : children}</AuthContext.Provider>
   );
 }
 

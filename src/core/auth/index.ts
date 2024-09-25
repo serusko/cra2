@@ -1,6 +1,6 @@
 export * from './AuthProvider';
 
-export * from './useGetProfile';
-export * from './useAuthToken';
-export * from './useLogin';
-export * from './useUser';
+export * from './hooks/useGetProfile';
+export * from './hooks/useAuthToken';
+export * from './hooks/useLogin';
+export * from './hooks/useUser';

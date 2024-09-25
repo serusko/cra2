@@ -1,5 +1,5 @@
 import { useCallback } from 'react';
-import User from './User';
+import User from '../User';
 
 /**
  * Request user profile
