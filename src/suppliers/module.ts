@@ -1,6 +1,6 @@
 import { ColDef } from '../core/containers/Table/components/TableItem';
 import { t } from '../core/translations';
-import SuppliersItem from './models/SuppliersItem';
+import { SupplierModel } from '../openapi/requests';
 
 const suppliersModule = {
   entities: {
@@ -9,8 +9,8 @@ const suppliersModule = {
         route: '/suppliers',
         apiUrl: `/suppliers`,
         label: t('Suppliers'),
-        columns: [{ name: 'id' }, { name: 'name' }, { name: 'ico' }, { name: 'dic' }] as ColDef<SuppliersItem>[],
-        item: {} as SuppliersItem,
+        columns: [{ name: 'id' }, { name: 'name' }, { name: 'ico' }, { name: 'dic' }] as ColDef<SupplierModel>[],
+        item: {} as SupplierModel,
       },
       detail: {
         route: (id: number | string = ':id') => `/suppliers/${id}`,

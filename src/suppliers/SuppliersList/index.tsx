@@ -1,15 +1,18 @@
 import { useNavigate } from 'react-router-dom';
-import ApiTable from '../../core/containers/Table/ApiTable';
-import SuppliersItem from '../models/SuppliersItem';
 import { entities } from '../../app/modules';
+import Table from '../../core/containers/Table';
+import { useDodavateliaServiceGetSuppliers } from '../../openapi/queries';
+import { SupplierModel } from '../../openapi/requests';
 
 function SuppliersList() {
   const nav = useNavigate();
 
+  const { data } = useDodavateliaServiceGetSuppliers();
+
   return (
-    <ApiTable<SuppliersItem>
+    <Table<SupplierModel>
       columns={entities.Supplier.list.columns}
-      url="/suppliers"
+      data={data}
       onRowClick={(item) => {
         nav(`/suppliers/${item.id}`);
       }}

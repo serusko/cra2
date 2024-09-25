@@ -12,7 +12,8 @@
     "lint:ts": "tsc",
     "lint": "npm run lint:js && npm run lint:ts",
     "spell": "cspell --config cspell.json ./",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "genapi": "openapi-rq -i ./api-docs.yaml -c axios -o src/openapi"
   },
   "dependencies": {
     "@loadable/component": "^5.16.4",
@@ -25,6 +26,7 @@
     "react-router-dom": "^6.26.2"
   },
   "devDependencies": {
+    "@7nohe/openapi-react-query-codegen": "^1.6.1",
     "@eslint/js": "^9.10.0",
     "@html-eslint/eslint-plugin": "^0.27.0",
     "@html-eslint/parser": "^0.27.0",

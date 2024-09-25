@@ -4,6 +4,7 @@
     "clsx",
     "iban",
     "metronic",
+    "openapi",
     "tailwindcss",
     "tanstack",
     "tseslint"

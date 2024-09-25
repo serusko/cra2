@@ -8,14 +8,14 @@ export interface Props<D> {
   onRowClick?: (item: D, index: number) => void;
   columns: ColDef<D>[];
   limit?: number;
-  data: D[];
+  data?: undefined | null | D[];
 }
 
 function Table<D>({ columns, data, onRowClick }: Props<D>) {
   const [page, setPage] = useState(0);
   const [limit, setLimit] = useState(10); // TODO: implement api pagination
 
-  const displayed = data.slice(page * limit, page * limit + limit);
+  const displayed = (data ?? []).slice(page * limit, page * limit + limit);
 
   return (
     <table>
@@ -38,7 +38,7 @@ function Table<D>({ columns, data, onRowClick }: Props<D>) {
         columns={columns}
         currentPage={page}
         limit={limit}
-        pages={getPagesNumber(data.length || 0, limit)}
+        pages={getPagesNumber((data ?? []).length || 0, limit)}
         onChangeLimit={setLimit}
         onPageSelect={setPage}
       />

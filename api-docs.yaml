@@ -1,0 +1,295 @@
+openapi: 3.0.0
+info:
+  title: 'Ocean API'
+  version: '0.1'
+paths:
+  /api: []
+  /auth/login:
+    post:
+      tags:
+        - Auth
+      summary: 'Prihlasenie a ziskanie tokenu'
+      responses:
+        200:
+          description: OK
+  /auth/me:
+    post:
+      tags:
+        - Auth
+      summary: 'Udaje prave prihlaseneho uzivatela'
+      responses:
+        200:
+          description: OK
+  /auth/logout:
+    post:
+      tags:
+        - Auth
+      summary: 'Odhlasenie prave prihlaseneho uzivatela'
+      responses:
+        200:
+          description: OK
+  /clients:
+    get:
+      tags:
+        - Klienti
+      summary: 'Zoznam vsetkych klientov'
+      parameters:
+        - name: count
+          in: query
+          description: 'Pocet zaznamov na jednu stranku'
+          required: false
+          schema:
+            type: string
+          examples:
+            int:
+              summary: 'An int value.'
+              value: '5'
+      responses:
+        200:
+          description: OK
+  '/clients/{id}':
+    get:
+      tags:
+        - Klienti
+      summary: 'Vrati data jedneho klienta'
+      parameters:
+        - name: id
+          in: path
+          description: 'ID klienta ktoreho data chceme ziskat'
+          required: true
+          schema:
+            type: string
+          examples:
+            int:
+              summary: 'An int value.'
+              value: '1'
+      responses:
+        200:
+          description: OK
+  '/suppliers/{suppid}/contact-persons':
+    get:
+      tags:
+        - 'Kontaktne osoby dodavatela'
+      summary: 'Zoznam kontaktnych osob dodavatela'
+      parameters:
+        - name: suppid
+          in: path
+          description: 'ID dodavatela'
+          required: true
+          schema:
+            type: integer
+      responses:
+        200:
+          description: OK
+    post:
+      tags:
+        - 'Kontaktne osoby dodavatela'
+      summary: 'Vytvorenie kontaktnej osoby pre konkretneho dodavatela'
+      parameters:
+        - name: suppid
+          in: path
+          description: 'ID dodavatela'
+          required: true
+          schema:
+            type: integer
+      responses:
+        200:
+          description: OK
+  '/suppliers/{suppid}/contact-persons/{id}':
+    get:
+      tags:
+        - 'Kontaktne osoby dodavatela'
+      summary: 'Konkretna kontaktna osoba jedneho dodavatela'
+      parameters:
+        - name: suppid
+          in: path
+          description: 'ID dodavatela'
+          required: true
+          schema:
+            type: integer
+        - name: id
+          in: path
+          description: 'ID kontaktnej osoby'
+          required: true
+          schema:
+            type: integer
+      responses:
+        200:
+          description: OK
+    delete:
+      tags:
+        - 'Kontaktne osoby dodavatela'
+      summary: 'Vymazanie jednej kontaktnej osoby pre konkretneho dodavatela'
+      parameters:
+        - name: suppid
+          in: path
+          description: 'ID dodavatela'
+          required: true
+          schema:
+            type: integer
+        - name: id
+          in: path
+          description: 'ID kontaktnej osoby'
+          required: true
+          schema:
+            type: integer
+      responses:
+        200:
+          description: OK
+    patch:
+      tags:
+        - 'Kontaktne osoby dodavatela'
+      summary: 'Aktualizacia udajov jednej kontaktnej osoby pre konkretneho dodavatela'
+      parameters:
+        - name: suppid
+          in: path
+          description: 'ID dodavatela'
+          required: true
+          schema:
+            type: integer
+        - name: id
+          in: path
+          description: 'ID kontaktnej osoby'
+          required: true
+          schema:
+            type: integer
+      responses:
+        200:
+          description: OK
+  /suppliers:
+    get:
+      tags:
+        - Dodavatelia
+      summary: 'Zoznam vsetkych dodavatelov'
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Suppliers'
+    post:
+      tags:
+        - Dodavatelia
+      summary: 'Vytvorenie noveho dodavatela'
+      responses:
+        200:
+          description: OK
+  '/suppliers/{id}':
+    get:
+      tags:
+        - Dodavatelia
+      summary: 'Udaje jedneho dodavatela podla ID'
+      parameters:
+        - name: id
+          in: path
+          description: 'ID dodavatela'
+          required: true
+          schema:
+            type: integer
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SupplierModel'
+    delete:
+      tags:
+        - Dodavatelia
+      summary: 'Vymazanie dodavatela podla ID'
+      parameters:
+        - name: id
+          in: path
+          description: 'ID dodavatela'
+          required: true
+          schema:
+            type: integer
+      responses:
+        200:
+          description: OK
+    patch:
+      tags:
+        - Dodavatelia
+      summary: 'Aktualizacia udajov dodavatela podla ID'
+      parameters:
+        - name: id
+          in: path
+          description: 'ID dodavatela'
+          required: true
+          schema:
+            type: integer
+      responses:
+        200:
+          description: OK
+  /api/users:
+    get:
+      tags:
+        - Uzivatelia
+      summary: 'Zoznam vsetkych uzivatelov'
+      responses:
+        200:
+          description: OK
+components:
+  schemas:
+    PersonModel:
+      title: PersonModel
+      description: PersonModel
+      required:
+        - id
+        - name
+        - organization_id
+        - assessment_period_id
+        - completed
+        - created_by
+        - updated_by
+      properties:
+        id:
+          description: 'Action Plan ID'
+          type: integer
+          format: int32
+        name:
+          description: 'Action Plan ID'
+          type: integer
+          format: int32
+      type: object
+    SupplierModel:
+      title: SupplierModel
+      description: SupplierModel
+      required:
+        - id
+        - name
+        - organization_id
+        - assessment_period_id
+        - completed
+        - created_by
+        - updated_by
+      properties:
+        id:
+          description: 'Action Plan ID'
+          type: integer
+          format: int32
+        name:
+          description: 'Action Plan ID'
+          type: integer
+          format: int32
+        days_of_invoices:
+          description: 'Days of Invoices'
+          type: integer
+          format: int32
+      type: object
+    Suppliers:
+      type: array
+      items:
+        $ref: '#/components/schemas/SupplierModel'
+tags:
+  - name: Auth
+    description: Auth
+  - name: Klienti
+    description: Klienti
+  - name: 'Kontaktne osoby dodavatela'
+    description: 'Kontaktne osoby dodavatela'
+  - name: Dodavatelia
+    description: Dodavatelia
+  - name: Uzivatelia
+    description: Uzivatelia
